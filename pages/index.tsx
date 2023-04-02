@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import { Inter } from 'next/font/google'
+import GameContainer from '@/components/game/game-container'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -13,7 +14,10 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        Portfolio!
+        <div className="main-container">
+          <GameContainer />
+          Portfolio!
+        </div>
       </main>
     </>
   )
