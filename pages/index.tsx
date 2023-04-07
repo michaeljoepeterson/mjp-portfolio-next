@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import { Inter } from 'next/font/google'
-import GameContainer from '@/components/game/game-container'
+import GameContainer from '@/components/core-game/game-container'
 import Image from 'next/image'
 import { useState } from 'react'
 

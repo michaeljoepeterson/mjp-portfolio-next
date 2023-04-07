@@ -1,6 +1,6 @@
 import { Games } from "@/models/game/games.enum"
 import { useMemo, useEffect } from "react";
-import { Application, Sprite, Assets } from 'pixi.js';
+import { Application, Container } from 'pixi.js';
 
 /**
  * main pixijs/game stage for rendering all assets
@@ -8,9 +8,11 @@ import { Application, Sprite, Assets } from 'pixi.js';
  * @returns
  */
 export const GameStage = ({
-    target
+    target,
+    children
 }: {
-    target: HTMLElement
+    target: HTMLElement;
+    children: (stage: Container) => any;
 }) => {
 
     const app = useMemo(() => {
@@ -35,6 +37,7 @@ export const GameStage = ({
 
     return (
         <>
+            {app?.stage && children(app?.stage)}
         </>
     )
 }

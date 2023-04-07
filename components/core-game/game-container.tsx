@@ -1,5 +1,5 @@
 import { Games } from "@/models/game/games.enum";
-import Pong from "./games/pong";
+import Pong from "../games/pong";
 
 export const GameContainer = ({
     selectedGame = Games.pong,
