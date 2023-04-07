@@ -2,10 +2,13 @@ import Head from 'next/head'
 import { Inter } from 'next/font/google'
 import GameContainer from '@/components/game/game-container'
 import Image from 'next/image'
+import { useState } from 'react'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
+  const [target, setTarget] = useState<HTMLElement>();
+
   return (
     <>
       <Head>
@@ -15,8 +18,14 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <div className="main-container">
-          <GameContainer />
+        <div className="main-container" ref={(ref) => setTarget(ref as HTMLElement)}>
+          { target && 
+            (
+              <GameContainer 
+                target={target}
+              />
+            )
+          }
           <div>
             <h1>
               Portfolio!
