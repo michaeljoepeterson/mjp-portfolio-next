@@ -1,4 +1,5 @@
 import { Container, Graphics } from 'pixi.js';
+import { useEffect } from 'react';
 
 export const Rectangle = ({
     stage,
@@ -15,11 +16,14 @@ export const Rectangle = ({
     x?: number;
     y?: number;
 }) => {
-    const graphics = new Graphics();
-    graphics.beginFill(color);
-    graphics.drawRect(x, y, width, height);
-    graphics.endFill();
-    stage.addChild(graphics);
+    //todo move to custom hook as more shapes/sprites added
+    useEffect(() => {
+        const graphics = new Graphics();
+        graphics.beginFill(color);
+        graphics.drawRect(x, y, width, height);
+        graphics.endFill();
+        stage.addChild(graphics);
+    }, [color, height, stage, width, x, y]);
     
     return (
         <></>
