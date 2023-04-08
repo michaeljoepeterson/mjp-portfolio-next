@@ -31,7 +31,7 @@ export const GameStage = ({
         if(app?.view){
             const el = app.view as any;
             el.classList.add("fixed");
-            el.classList.add("top-0")
+            el.classList.add("top-0");
         }
     }, [app]);
 
