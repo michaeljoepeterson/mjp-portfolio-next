@@ -18,7 +18,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <div className="main-container" ref={(ref) => setTarget(ref as HTMLElement)}>
+        <div className="main-container relative" ref={(ref) => setTarget(ref as HTMLElement)}>
           { target && 
             (
               <GameContainer 
@@ -26,7 +26,7 @@ export default function Home() {
               />
             )
           }
-          <div>
+          <div className="relative z-10 h-[400em]">
             <h1>
               Portfolio!
             </h1>

@@ -1,4 +1,3 @@
-import { Games } from "@/models/game/games.enum"
 import { useMemo, useEffect } from "react";
 import { Application, Container } from 'pixi.js';
 
@@ -18,20 +17,31 @@ export const GameStage = ({
     const app = useMemo(() => {
         //catch issue with ssr
         try{
-            return new Application({});
+            return new Application({
+                resizeTo: window,
+            });
         }
         catch(e){
             console.error(e);
             return null
         }
-    }, []);
+    }, [target]);
+
+    useEffect(() => {
+        if(app?.view){
+            const el = app.view as any;
+            el.classList.add("fixed");
+            el.classList.add("top-0")
+        }
+    }, [app]);
 
     useEffect(() => {
         if(!app || !app?.view){
             return
         }
 
-        const el = app.view as any
+        const el = app.view as any;
+        console.dir(el);
         target.appendChild(el);
     }, [app, target]);
 
