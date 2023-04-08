@@ -25,7 +25,7 @@ export const GameStage = ({
             console.error(e);
             return null
         }
-    }, [target]);
+    }, []);
 
     useEffect(() => {
         if(app?.view){

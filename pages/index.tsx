@@ -26,10 +26,20 @@ export default function Home() {
               />
             )
           }
-          <div className="relative z-10 h-[400em]">
+          <div className="relative z-10 min-h-[400em]">
             <h1>
               Portfolio!
             </h1>
+            <div className="min-h-[50em]">
+              <p className="mb-[50em]">Some stuff</p>
+              <Image
+                src="/assets/alienbusters.png"
+                alt="test image"
+                width={400}
+                height={400}
+              />
+              <p className="mb-[50em]">Some more stuff stuff</p>
+            </div>
             <Image
               src="/assets/alienbusters.png"
               alt="test image"
