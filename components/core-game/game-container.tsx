@@ -1,5 +1,6 @@
 import { Games } from "@/models/game/games.enum";
 import Pong from "../games/pong";
+import MainGame from "./main-game/mina-game";
 
 export const GameContainer = ({
     selectedGame = Games.pong,
@@ -13,7 +14,17 @@ export const GameContainer = ({
     return (
         <div>
             Game container
-            { selectedGame === Games.pong && (<Pong target={target}/>)}
+            <MainGame target={target}>
+                {
+                    (stage) => {
+                        return (
+                            <>
+                                { selectedGame === Games.pong && (<Pong stage={stage} target={target}/>)}
+                            </>
+                        )
+                    }
+                }
+            </MainGame>
         </div>
     )
 }

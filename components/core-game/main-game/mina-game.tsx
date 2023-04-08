@@ -6,7 +6,7 @@ import { Application, Container } from 'pixi.js';
  * to be used by a game component to render the game
  * @returns
  */
-export const GameStage = ({
+export const MainGame = ({
     target,
     children
 }: {
@@ -26,6 +26,12 @@ export const GameStage = ({
             return null
         }
     }, []);
+
+    useEffect(() => {
+        return () => {
+            console.log('cleanup app', app);
+        }
+    }, [app]);
 
     useEffect(() => {
         if(app?.view){
@@ -52,4 +58,4 @@ export const GameStage = ({
     )
 }
 
-export default GameStage
+export default MainGame

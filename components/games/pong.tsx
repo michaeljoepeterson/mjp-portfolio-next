@@ -1,30 +1,26 @@
-import GameStage from "../core-game/game-stage/game-stage";
+import { Container } from "pixi.js";
 import Rectangle from "../core-game/shapes/rectangle";
 
 export const Pong = ({
-    target
+    target,
+    stage
 }: {
-    target: HTMLElement
+    target: HTMLElement;
+    stage: Container;
 }) => {
 
     return (
         <>
-            <GameStage target={target}>
-                {
-                    (stage) => (
-                        <>
-                            <Rectangle 
-                                stage={stage}
-                                x={100}
-                            />
-                            <Rectangle 
-                                stage={stage}
-                                color="blue"
-                            />
-                        </>
-                    )
-                }
-            </GameStage>
+            <>
+                <Rectangle 
+                    stage={stage}
+                    x={100}
+                />
+                <Rectangle 
+                    stage={stage}
+                    color="blue"
+                />
+            </>
         </>
     );
 }

@@ -9,7 +9,7 @@ export const Rectangle = ({
     x = 0,
     y = 0
 }: {
-    stage: Container<any>;
+    stage: Container;
     color?: string;
     width?: number;
     height?: number;
