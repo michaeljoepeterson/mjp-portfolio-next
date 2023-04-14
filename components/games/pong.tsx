@@ -14,7 +14,7 @@ export const Pong = ({
     const paddleHeight = 150;
     const playerY = mouseY - paddleHeight / 2;
     const enemyX = window.innerWidth - 50;
-    console.log(enemyX);
+
     return (
         <>
             <>
