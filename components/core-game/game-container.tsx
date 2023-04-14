@@ -8,7 +8,6 @@ import { setMousePosition } from "@/store/game-state/game-slice";
 /**
  * main game container that hooks up the main game stage and renders the correct selected game
  * also updates the global game state
- * @param param0 
  * @returns 
  */
 export const GameContainer = ({
@@ -22,7 +21,6 @@ export const GameContainer = ({
     const dispatch = useDispatch();
 
     const handleMouseMove = useCallback((e: MouseEvent) => {
-        console.log(e);
         const {clientX, clientY} = e;
         dispatch(setMousePosition({
             x: clientX,
@@ -44,7 +42,7 @@ export const GameContainer = ({
                     (stage) => {
                         return (
                             <>
-                                { selectedGame === Games.pong && (<Pong stage={stage} target={target}/>)}
+                                { selectedGame === Games.pong && (<Pong stage={stage} />)}
                             </>
                         )
                     }

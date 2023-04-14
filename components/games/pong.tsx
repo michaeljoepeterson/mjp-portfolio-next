@@ -4,26 +4,33 @@ import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 
 export const Pong = ({
-    target,
     stage
 }: {
-    target: HTMLElement;
     stage: Container;
 }) => {
     const gameState = useSelector((state: RootState) => state.gameState);
-    const {mouseX, mouseY} = gameState;
-
-    console.log(mouseX, mouseY);
+    const {mouseY} = gameState;
+    const paddleWidth = 50;
+    const paddleHeight = 150;
+    const playerY = mouseY - paddleHeight / 2;
+    const enemyX = window.innerWidth - 50;
+    console.log(enemyX);
     return (
         <>
             <>
                 <Rectangle 
                     stage={stage}
-                    x={100}
+                    color="blue"
+                    height={paddleHeight}
+                    width={paddleWidth}
+                    x={0}
+                    y={playerY}
                 />
                 <Rectangle 
                     stage={stage}
-                    color="blue"
+                    x={enemyX}
+                    height={paddleHeight}
+                    width={paddleWidth}
                 />
             </>
         </>
