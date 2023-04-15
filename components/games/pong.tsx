@@ -2,6 +2,7 @@ import { Container } from "pixi.js";
 import Rectangle from "../core-game/shapes/rectangle";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
+import Circle from "../core-game/shapes/circle";
 
 export const Pong = ({
     stage
@@ -14,6 +15,9 @@ export const Pong = ({
     const paddleHeight = 150;
     const playerY = mouseY - paddleHeight / 2;
     const enemyX = window.innerWidth - 50;
+    const ballX = window.innerWidth / 2;
+    const ballY = window.innerHeight / 2;
+    const ballRadius = 25;
 
     return (
         <>
@@ -31,6 +35,13 @@ export const Pong = ({
                     x={enemyX}
                     height={paddleHeight}
                     width={paddleWidth}
+                />
+                <Circle 
+                    x={ballX}
+                    y={ballY}
+                    radius={ballRadius}
+                    stage={stage}
+                    color="green"
                 />
             </>
         </>

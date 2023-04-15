@@ -1,5 +1,6 @@
-import { Container, Graphics } from 'pixi.js';
-import { useEffect, useRef } from 'react';
+import useShape from '@/hooks/useShape';
+import { GameShape } from '@/models/game/game-shapes';
+import { RectangleProps } from '@/models/game/rectangle-props';
 
 export const Rectangle = ({
     stage,
@@ -7,28 +8,17 @@ export const Rectangle = ({
     width = 50,
     height = 50,
     x = 0,
-    y = 0
-}: {
-    stage: Container;
-    color?: string;
-    width?: number;
-    height?: number;
-    x?: number;
-    y?: number;
-}) => {
-    const rectGraphics = useRef<Graphics>();
-    //todo move to custom hook as more shapes/sprites added
-    useEffect(() => {
-        if(rectGraphics.current){
-            rectGraphics.current.clear();
-        }
-        const graphics = new Graphics();
-        graphics.beginFill(color);
-        graphics.drawRect(x, y, width, height);
-        graphics.endFill();
-        stage.addChild(graphics);
-        rectGraphics.current = graphics;
-    }, [color, height, stage, width, x, y]);
+    y = 0,
+}: RectangleProps) => {
+    useShape({
+        shape: GameShape.rectangle,
+        stage,
+        color,
+        width,
+        height,
+        x,
+        y
+    });
     
     return (
         <></>
