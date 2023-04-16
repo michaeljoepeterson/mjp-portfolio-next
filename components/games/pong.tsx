@@ -1,13 +1,18 @@
-import { Container } from "pixi.js";
+import { Application, Container } from "pixi.js";
 import Rectangle from "../core-game/shapes/rectangle";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 import Circle from "../core-game/shapes/circle";
+import Matter from "matter-js";
 
 export const Pong = ({
-    stage
+    stage,
+    app,
+    engine
 }: {
     stage: Container;
+    app: Application;
+    engine: Matter.Engine;
 }) => {
     const gameState = useSelector((state: RootState) => state.gameState);
     const {mouseY} = gameState;

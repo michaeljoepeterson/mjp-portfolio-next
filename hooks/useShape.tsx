@@ -10,11 +10,11 @@ export const useShape = ({
     shape = GameShape.rectangle,
     stage,
     color = 'red',
-    width = 50,
-    height = 50,
+    width = 0,
+    height = 0,
     x = 0,
     y = 0,
-    radius
+    radius = 0
 }: {
     shape: GameShape
 } & shapeProps) => {

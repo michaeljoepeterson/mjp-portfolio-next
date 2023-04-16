@@ -39,10 +39,18 @@ export const GameContainer = ({
             Game container
             <MainGame target={target}>
                 {
-                    (stage) => {
+                    ({stage, app, engine}) => {
                         return (
                             <>
-                                { selectedGame === Games.pong && (<Pong stage={stage} />)}
+                                { selectedGame === Games.pong && 
+                                    (
+                                        <Pong 
+                                            stage={stage}
+                                            app={app}
+                                            engine={engine} 
+                                        />
+                                    )
+                                }
                             </>
                         )
                     }

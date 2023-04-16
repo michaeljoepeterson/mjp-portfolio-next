@@ -1,5 +1,6 @@
-import { useMemo, useEffect } from "react";
-import { Application, Container } from 'pixi.js';
+import { useMemo, useEffect, useRef, useCallback } from "react";
+import { Application, Container, Ticker } from 'pixi.js';
+import { Engine } from "matter-js";
 
 /**
  * main pixijs/game stage for rendering all assets
@@ -11,21 +12,64 @@ export const MainGame = ({
     children
 }: {
     target: HTMLElement;
-    children: (stage: Container) => any;
+    children: (props: {
+        stage: Container;
+        app: Application;
+        engine: Engine;
+    }) => any;
 }) => {
+
+    const tickerRef = useRef<Ticker | null>();
+
+    const engine = useMemo(() => {
+        try{
+            return Engine.create();
+        }
+        catch(e){
+            console.error(e);
+            return null;
+        }
+    }, []);
 
     const app = useMemo(() => {
         //catch issue with ssr
         try{
-            return new Application({
+            const a = new Application({
                 resizeTo: window,
             });
+            a.ticker.minFPS = 40;
+            a.ticker.maxFPS = 60;
+            return a;
         }
         catch(e){
             console.error(e);
             return null
         }
     }, []);
+
+    const updateEngine = useCallback(() => {
+        if(!app || !engine){
+            return;
+        }
+        const fps = app.ticker.FPS / 1000;
+        Engine.update(engine, fps);
+        console.log('updating engine', new Date().getSeconds(), app.ticker.FPS);
+    }, []);
+
+    useEffect(() => {
+        if(app && engine && !tickerRef.current){
+            console.log('add ticker');
+            tickerRef.current = app.ticker.add(updateEngine);
+
+        }
+        return () => {
+            if(app && tickerRef.current){
+                console.log('remove ticker')
+                app.ticker.remove(updateEngine);
+                tickerRef.current = null;
+            }
+        }
+    }, [app, engine]);
 
     useEffect(() => {
         return () => {
@@ -53,7 +97,12 @@ export const MainGame = ({
 
     return (
         <>
-            {app?.stage && children(app?.stage)}
+            {app?.stage && engine && children({
+                    stage: app.stage,
+                    app,
+                    engine
+                })
+            }
         </>
     )
 }
