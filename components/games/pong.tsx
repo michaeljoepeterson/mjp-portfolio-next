@@ -47,6 +47,8 @@ export const Pong = ({
                     radius={ballRadius}
                     stage={stage}
                     color="green"
+                    engine={engine}
+                    app={app}
                 />
             </>
         </>
