@@ -23,7 +23,14 @@ export const MainGame = ({
 
     const engine = useMemo(() => {
         try{
-            return Engine.create();
+            const engine = Engine.create({
+                gravity: {
+                    x: 1,
+                    y: 1,
+                    scale: 2
+                }
+            });
+            return engine;
         }
         catch(e){
             console.error(e);

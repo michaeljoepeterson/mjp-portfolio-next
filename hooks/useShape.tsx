@@ -1,7 +1,7 @@
 import { GameShape } from "@/models/game/game-shapes";
 import { shapeProps } from "@/models/game/shape-props";
-import { Graphics } from "pixi.js";
-import { useRef, useEffect } from "react";
+import { Container, Graphics } from "pixi.js";
+import { useRef, useEffect, useCallback } from "react";
 import useRigidBody from "./useRigidBody";
 
 
@@ -31,16 +31,9 @@ export const useShape = ({
         engine
     });
 
-    console.log("shape hook", rigidBody);
+    console.log("shape hook", x, y, shape);
 
-    //todo move to custom hook as more shapes/sprites added
-    useEffect(() => {
-        if(!stage){
-            return;
-        }
-        if(graphicsRef.current){
-            graphicsRef.current.clear();
-        }
+    const drawGraphics = useCallback((stage: Container, x: number, y: number) => {
         const graphics = new Graphics();
         graphics.beginFill(color);
         if(shape === GameShape.rectangle){
@@ -50,8 +43,20 @@ export const useShape = ({
             graphics.drawCircle(x, y, radius);
         }
         graphics.endFill();
+        //graphics.position.set(x, y);
         stage.addChild(graphics);
-        graphicsRef.current = graphics;
+        return graphics;
+    }, []);
+
+    //todo move to custom hook as more shapes/sprites added
+    useEffect(() => {
+        if(!stage){
+            return;
+        }
+        if(graphicsRef.current){
+            graphicsRef.current.clear();
+        }
+        graphicsRef.current = drawGraphics(stage, x, y);
     }, [color, height, stage, width, x, y]);
 
     useEffect(() => {
@@ -59,9 +64,13 @@ export const useShape = ({
             return;
         }
         app.ticker.add(() => {
-            if(graphicsRef.current){
-                graphicsRef.current.position.x = rigidBody.position.x;
-                graphicsRef.current.position.y = rigidBody.position.y;
+            if(graphicsRef.current && stage){
+                graphicsRef.current.clear();
+                graphicsRef.current = drawGraphics(stage, rigidBody.position.x, rigidBody.position.y);
+                //graphicsRef.current.position.set(rigidBody.position.x, rigidBody.position.y)
+                // debugger
+                // graphicsRef.current.position.x = rigidBody.position.x;
+                // graphicsRef.current.position.y = rigidBody.position.y;
             }
         });
     }, [rigidBody, app, enableMatter]);
