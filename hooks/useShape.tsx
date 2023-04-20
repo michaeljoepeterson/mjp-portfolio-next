@@ -37,13 +37,15 @@ export const useShape = ({
         const graphics = new Graphics();
         graphics.beginFill(color);
         if(shape === GameShape.rectangle){
-            graphics.drawRect(x, y, width, height);
+            graphics.drawRect(0, 0, width, height);
         }
         else if(shape === GameShape.circle){
-            graphics.drawCircle(x, y, radius);
+            graphics.drawCircle(0, 0, radius);
+        }
+        if(!enableMatter){
+            graphics.position.set(x, y);
         }
         graphics.endFill();
-        //graphics.position.set(x, y);
         stage.addChild(graphics);
         return graphics;
     }, []);
@@ -64,13 +66,8 @@ export const useShape = ({
             return;
         }
         app.ticker.add(() => {
-            if(graphicsRef.current && stage){
-                graphicsRef.current.clear();
-                graphicsRef.current = drawGraphics(stage, rigidBody.position.x, rigidBody.position.y);
-                //graphicsRef.current.position.set(rigidBody.position.x, rigidBody.position.y)
-                // debugger
-                // graphicsRef.current.position.x = rigidBody.position.x;
-                // graphicsRef.current.position.y = rigidBody.position.y;
+            if(stage && graphicsRef.current){
+                graphicsRef.current.position.set(rigidBody.position.x, rigidBody.position.y);
             }
         });
     }, [rigidBody, app, enableMatter]);
