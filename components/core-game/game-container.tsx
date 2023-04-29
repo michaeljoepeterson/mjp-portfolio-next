@@ -3,7 +3,7 @@ import Pong from "../games/pong";
 import MainGame from "./main-game/main-game";
 import { useCallback, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { setMousePosition } from "@/store/game-state/game-slice";
+import { setGame, setMousePosition } from "@/store/game-state/game-slice";
 
 /**
  * main game container that hooks up the main game stage and renders the correct selected game
@@ -33,6 +33,10 @@ export const GameContainer = ({
 
         return () => document.removeEventListener("mousemove", handleMouseMove);
     }, [handleMouseMove]);
+
+    useEffect(() => {
+        setGame(selectedGame);
+    }, [selectedGame]);
 
     return (
         <div>

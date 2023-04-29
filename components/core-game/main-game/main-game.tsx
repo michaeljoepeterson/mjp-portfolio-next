@@ -1,6 +1,10 @@
 import { useMemo, useEffect, useRef, useCallback } from "react";
 import { Application, Container, Ticker } from 'pixi.js';
 import { Engine } from "matter-js";
+import { useSelector } from "react-redux";
+import { selectGameShapes, selectTotalGameShapes } from "@/store/game-state/selectors/game-selectors";
+import { RootState } from "@/store/store";
+import { GameObject } from "@/models/game/game-object/game-object";
 
 /**
  * main pixijs/game stage for rendering all assets
@@ -18,6 +22,18 @@ export const MainGame = ({
         engine: Engine;
     }) => any;
 }) => {
+
+    const baseShapes = useSelector((state: RootState) => selectGameShapes(state));
+    const totalShapes = useSelector((state: RootState) => selectTotalGameShapes(state));
+
+    console.log('base shapes: ', baseShapes, totalShapes);
+    const gameObjects: GameObject[] = useMemo(() => {
+        return [];
+    }, [baseShapes]);
+
+    useEffect(() => {
+        // logic to determine if the game integration with react has finished initializing before creating sprites/bodies
+    }, [gameObjects, totalShapes]);
 
     const tickerRef = useRef<Ticker | null>();
     // create game physics engine
@@ -37,6 +53,8 @@ export const MainGame = ({
             return null;
         }
     }, []);
+
+    // todo split up into smaller hooks for easier readability
 
     // create game screen/canvas
     const app = useMemo(() => {
