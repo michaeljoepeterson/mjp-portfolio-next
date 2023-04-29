@@ -26,31 +26,29 @@ export const Pong = ({
 
     return (
         <>
-            <>
-                <Rectangle 
-                    stage={stage}
-                    color="blue"
-                    height={paddleHeight}
-                    width={paddleWidth}
-                    x={0}
-                    y={playerY}
-                />
-                <Rectangle 
-                    stage={stage}
-                    x={enemyX}
-                    height={paddleHeight}
-                    width={paddleWidth}
-                />
-                <Circle 
-                    x={ballX}
-                    y={ballY}
-                    radius={ballRadius}
-                    stage={stage}
-                    color="green"
-                    engine={engine}
-                    app={app}
-                />
-            </>
+            <Rectangle 
+                stage={stage}
+                color="blue"
+                height={paddleHeight}
+                width={paddleWidth}
+                x={0}
+                y={playerY}
+            />
+            <Rectangle 
+                stage={stage}
+                x={enemyX}
+                height={paddleHeight}
+                width={paddleWidth}
+            />
+            <Circle 
+                x={ballX}
+                y={ballY}
+                radius={ballRadius}
+                stage={stage}
+                color="green"
+                engine={engine}
+                app={app}
+            />
         </>
     );
 }

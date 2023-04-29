@@ -1,6 +1,6 @@
 import useShape from "@/hooks/useShape";
 import { CircleProps } from "@/models/game/circle-props";
-import { GameShape } from "@/models/game/game-shapes";
+import { GameShape } from "@/models/game/enums/game-shapes";
 
 export const Circle = ({
     stage,

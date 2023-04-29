@@ -1,4 +1,4 @@
-import { GameShape } from "@/models/game/game-shapes";
+import { GameShape } from "@/models/game/enums/game-shapes";
 import { shapeProps } from "@/models/game/shape-props";
 import { Container, Graphics } from "pixi.js";
 import { useRef, useEffect, useCallback } from "react";

@@ -1,5 +1,5 @@
 import useShape from '@/hooks/useShape';
-import { GameShape } from '@/models/game/game-shapes';
+import { GameShape } from '@/models/game/enums/game-shapes';
 import { RectangleProps } from '@/models/game/rectangle-props';
 
 export const Rectangle = ({

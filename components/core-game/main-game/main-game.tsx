@@ -20,7 +20,7 @@ export const MainGame = ({
 }) => {
 
     const tickerRef = useRef<Ticker | null>();
-
+    // create game physics engine
     const engine = useMemo(() => {
         try{
             const engine = Engine.create({
@@ -38,6 +38,7 @@ export const MainGame = ({
         }
     }, []);
 
+    // create game screen/canvas
     const app = useMemo(() => {
         //catch issue with ssr
         try{
@@ -54,6 +55,7 @@ export const MainGame = ({
         }
     }, []);
 
+    // update the engine when the game canvas updates
     const updateEngine = useCallback(() => {
         if(!app || !engine){
             return;
@@ -63,6 +65,7 @@ export const MainGame = ({
         //console.log('updating engine', new Date().getSeconds());
     }, []);
 
+    // sync the engine and game updates
     useEffect(() => {
         if(app && engine && !tickerRef.current){
             console.log('add ticker');

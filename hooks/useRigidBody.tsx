@@ -1,7 +1,7 @@
-import { GameShape } from "@/models/game/game-shapes";
+import { GameShape } from "@/models/game/enums/game-shapes";
 import { shapeProps } from "@/models/game/shape-props";
 import { Bodies, Body, Composite } from "matter-js";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 export const useRigidBody = ({
     shape,

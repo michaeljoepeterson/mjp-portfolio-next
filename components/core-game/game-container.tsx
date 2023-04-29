@@ -1,4 +1,4 @@
-import { Games } from "@/models/game/games.enum";
+import { Games } from "@/models/game/enums/games.enum";
 import Pong from "../games/pong";
 import MainGame from "./main-game/main-game";
 import { useCallback, useEffect } from "react";
