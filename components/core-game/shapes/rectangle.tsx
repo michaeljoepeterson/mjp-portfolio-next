@@ -1,8 +1,5 @@
 import { useGameObject } from '@/hooks/useGameObject';
-import useShape from '@/hooks/useShape';
 import { GameObjectProps } from '@/models/game/game-object-props';
-import { GameShape } from '@/models/game/game-shapes';
-import { RectangleProps } from '@/models/game/rectangle-props';
 
 export const Rectangle = ({
     stage,
@@ -12,6 +9,7 @@ export const Rectangle = ({
     height = 50,
     x = 0,
     y = 0,
+    engine
 }: GameObjectProps) => {
     useGameObject({
         stage,
@@ -20,8 +18,9 @@ export const Rectangle = ({
         height,
         x,
         y,
-        app
-    })
+        app,
+        engine
+    });
     
     return (
         <></>

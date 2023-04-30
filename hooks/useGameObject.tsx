@@ -16,7 +16,6 @@ export const useGameObject = (props: GameObjectProps) => {
         engine,
         x,
         y,
-        shape = GameShape.rectangle
     } = props;
     const enableBodyRef = useRef(false);
 

@@ -16,8 +16,8 @@ export const Pong = ({
 }) => {
     const gameState = useSelector((state: RootState) => state.gameState);
     const {mouseY} = gameState;
-    const paddleWidth = 50;
-    const paddleHeight = 150;
+    const paddleWidth = 20;
+    const paddleHeight = 200;
     const playerY = mouseY - paddleHeight / 2;
     const enemyX = window.innerWidth - 50;
     const ballX = window.innerWidth / 2;
@@ -49,7 +49,7 @@ export const Pong = ({
                 y={ballY}
                 radius={ballRadius}
                 stage={stage}
-                color="green"
+                color="yellow"
                 engine={engine}
                 app={app}
             />

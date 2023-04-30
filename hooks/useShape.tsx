@@ -30,17 +30,6 @@ export const useShape = ({
 } => {
 
     const graphicsRef = useRef<Graphics>();
-    // todo move outside of shape to shape component and only register rigid body if it should be registered and pass rigid body to shape as optional
-    // const rigidBody = useRigidBody({
-    //     shape,
-    //     app,
-    //     width,
-    //     height,
-    //     x,
-    //     y,
-    //     radius,
-    //     engine
-    // });
 
     //console.log("shape hook", x, y, shape);
 

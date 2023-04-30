@@ -25,7 +25,7 @@ export const MainGame = ({
         try{
             const engine = Engine.create({
                 gravity: {
-                    x: 1,
+                    x: 0,
                     y: 1,
                     scale: 2
                 },
