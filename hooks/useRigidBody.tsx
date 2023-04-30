@@ -41,26 +41,6 @@ export const useRigidBody = ({
         }
     }, [rigidBody]);
 
-    // useEffect(() => {
-    //     if(app && engine && !rigidBodyRef){
-    //         let rigidBody;
-    //         if(shape === GameShape.circle){
-    //             rigidBody = Bodies.circle(x, y, radius);
-    //         }
-    //         if(rigidBody){
-    //             Composite.add(engine?.world, rigidBody);
-    //             setRigidBodyRef(rigidBody);
-    //             console.log('circle rigid body', rigidBodyRef)
-    //         }
-    //     }
-    //     return () => {
-    //         if(rigidBodyRef && engine){
-    //             Composite.remove(engine?.world, rigidBodyRef);
-    //             setRigidBodyRef(undefined);
-    //         }
-    //     }
-    // }, [enable]);
-
     return {
         rigidBody,
         addBody

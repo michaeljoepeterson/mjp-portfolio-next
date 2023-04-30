@@ -42,7 +42,7 @@ export const useShape = ({
     //     engine
     // });
 
-    console.log("shape hook", x, y, shape);
+    //console.log("shape hook", x, y, shape);
 
     const drawGraphics = useCallback((stage: Container) => {
         if(graphicsRef.current){

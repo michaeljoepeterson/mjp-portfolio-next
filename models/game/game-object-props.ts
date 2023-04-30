@@ -5,7 +5,7 @@ import { ShapeProps } from "./shape-props";
 
 export interface GameObjectProps extends ShapeProps{
     enableMatter?: boolean;
-    app?: Application;
-    stage?: Container;
-    engine?: Engine;
+    app: Application;
+    stage: Container;
+    engine: Engine;
 }

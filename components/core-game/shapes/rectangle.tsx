@@ -13,15 +13,6 @@ export const Rectangle = ({
     x = 0,
     y = 0,
 }: GameObjectProps) => {
-    // useShape({
-    //     shape: GameShape.rectangle,
-    //     stage,
-    //     color,
-    //     width,
-    //     height,
-    //     x,
-    //     y
-    // });
     useGameObject({
         stage,
         color,

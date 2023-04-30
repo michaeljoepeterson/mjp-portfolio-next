@@ -34,6 +34,7 @@ export const Pong = ({
                 x={0}
                 y={playerY}
                 app={app}
+                engine={engine}
             />
             <Rectangle 
                 stage={stage}
@@ -41,8 +42,9 @@ export const Pong = ({
                 height={paddleHeight}
                 width={paddleWidth}
                 app={app}
+                engine={engine}
             />
-            {/* <Circle 
+            <Circle 
                 x={ballX}
                 y={ballY}
                 radius={ballRadius}
@@ -50,7 +52,7 @@ export const Pong = ({
                 color="green"
                 engine={engine}
                 app={app}
-            /> */}
+            />
         </>
     );
 }
