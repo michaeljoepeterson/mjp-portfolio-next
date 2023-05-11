@@ -5,6 +5,7 @@ import { Engine } from "matter-js";
 /**
  * main pixijs/game stage for rendering all assets
  * to be used by a game component to render the game
+ * connexts pixijs with matterjs
  * @returns
  */
 export const MainGame = ({
@@ -25,8 +26,8 @@ export const MainGame = ({
         try{
             const engine = Engine.create({
                 gravity: {
-                    x: 0,
-                    y: 1,
+                    x: -2,
+                    y: -8,
                     scale: 2
                 },
             });
@@ -97,7 +98,6 @@ export const MainGame = ({
         }
 
         const el = app.view as any;
-        console.dir(el);
         target.appendChild(el);
     }, [app, target]);
 

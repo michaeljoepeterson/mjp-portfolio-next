@@ -1,8 +1,7 @@
 import { GameObjectProps } from "@/models/game/game-object-props";
-import { GameShape } from "@/models/game/game-shapes";
 import useShape from "./useShape";
 import useRigidBody from "./useRigidBody";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 
 /**
  * game object hook that combines the matter rigid body with the pixijs shape
@@ -16,8 +15,9 @@ export const useGameObject = (props: GameObjectProps) => {
         engine,
         x,
         y,
+        isStatic
     } = props;
-    const enableBodyRef = useRef(false);
+    const hasEnabledBodyRef = useRef(false);
 
     const {
         graphics,
@@ -30,21 +30,23 @@ export const useGameObject = (props: GameObjectProps) => {
         addBody
     } = useRigidBody({
        ...props,
-       enable: enableBodyRef.current
+       isStatic
     });
 
+    // sync sprite with rigid body
     useEffect(() => {
         if(!app || !enableMatter){
             return;
         }
         app.ticker.add(() => {
-            if(enableMatter && !enableBodyRef.current){
-                enableBodyRef.current = true;
+            if(enableMatter && !hasEnabledBodyRef.current){
+                hasEnabledBodyRef.current = true;
                 addBody(engine);
             }
-            if(stage && graphics && rigidBody){
-                console.log('update body pos');
-                graphics.position.set(rigidBody.position.x, rigidBody.position.y);
+            if(stage && graphics && rigidBody && !isStatic){
+                if(graphics.position.x !== rigidBody.position.x || graphics.position.y !== rigidBody.position.y){
+                    updatePosition(rigidBody.position.x, rigidBody.position.y);
+                }
             }
         });
     }, [rigidBody, app, enableMatter]);

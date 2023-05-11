@@ -1,5 +1,6 @@
 import { useGameObject } from '@/hooks/useGameObject';
 import { GameObjectProps } from '@/models/game/game-object-props';
+import { GameShape } from '@/models/game/game-shapes';
 
 export const Rectangle = ({
     stage,
@@ -9,7 +10,9 @@ export const Rectangle = ({
     height = 50,
     x = 0,
     y = 0,
-    engine
+    engine,
+    enableMatter,
+    isStatic
 }: GameObjectProps) => {
     useGameObject({
         stage,
@@ -19,7 +22,10 @@ export const Rectangle = ({
         x,
         y,
         app,
-        engine
+        engine,
+        enableMatter,
+        shape: GameShape.rectangle,
+        isStatic
     });
     
     return (

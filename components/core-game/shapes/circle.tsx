@@ -9,7 +9,8 @@ export const Circle = ({
     y = 0,
     radius = 50,
     app,
-    engine
+    engine,
+    enableMatter
 }: GameObjectProps) => {
 
     useGameObject({
@@ -21,7 +22,7 @@ export const Circle = ({
         y,
         engine,
         app,
-        enableMatter: true
+        enableMatter
     });
 
     return (

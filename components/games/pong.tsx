@@ -23,6 +23,10 @@ export const Pong = ({
     const ballX = window.innerWidth / 2;
     const ballY = window.innerHeight / 2;
     const ballRadius = 25;
+    const topWallY = -30;
+    const bottomWallY = window.innerHeight;
+    const wallWidth = window.innerWidth;
+    const wallHeight = 30;
 
     return (
         <>
@@ -35,6 +39,8 @@ export const Pong = ({
                 y={playerY}
                 app={app}
                 engine={engine}
+                enableMatter={true}
+                isStatic={false}
             />
             <Rectangle 
                 stage={stage}
@@ -43,6 +49,8 @@ export const Pong = ({
                 width={paddleWidth}
                 app={app}
                 engine={engine}
+                enableMatter={true}
+                isStatic={true}
             />
             <Circle 
                 x={ballX}
@@ -52,6 +60,31 @@ export const Pong = ({
                 color="yellow"
                 engine={engine}
                 app={app}
+                enableMatter={true}
+            />
+            <Rectangle 
+                stage={stage}
+                x={0}
+                y={topWallY}
+                height={wallHeight}
+                width={wallWidth}
+                app={app}
+                engine={engine}
+                color="green"
+                enableMatter={true}
+                isStatic={true}
+            />
+            <Rectangle 
+                stage={stage}
+                x={0}
+                y={bottomWallY}
+                height={wallHeight}
+                width={wallWidth}
+                app={app}
+                engine={engine}
+                color="green"
+                enableMatter={true}
+                isStatic={true}
             />
         </>
     );

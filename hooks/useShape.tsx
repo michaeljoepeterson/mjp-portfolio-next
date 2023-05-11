@@ -26,13 +26,16 @@ export const useShape = ({
      * update teh position based off the passed props
      * @returns
      */
-    updatePosition: () => void;
+    updatePosition: (x?: number, y?:number) => void;
 } => {
 
     const graphicsRef = useRef<Graphics>();
 
     //console.log("shape hook", x, y, shape);
 
+    /**
+     * use to initially draw the graphics/sprite when ready
+     */
     const drawGraphics = useCallback((stage: Container) => {
         if(graphicsRef.current){
             stage.removeChild(graphicsRef.current);
@@ -53,12 +56,14 @@ export const useShape = ({
         return curretnGraphics;
     }, [graphicsRef.current, x, y, radius, width, height]);
 
-    const updatePosition = useCallback(() => {
+    /**
+     * use to update the position of the graphics/sprite
+     */
+    const updatePosition = useCallback((posX: number = x, posY: number = y) => {
         if(!graphicsRef.current){
             return;
         }
-        console.log('update pos', x, y);
-        graphicsRef.current.position.set(x, y);
+        graphicsRef.current.position.set(posX, posY);
     }, [graphicsRef.current, x, y]);
 
     return {

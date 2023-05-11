@@ -1,7 +1,8 @@
 import { GameShape } from "@/models/game/game-shapes";
 import { Bodies, Body, Composite, Engine } from "matter-js";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { ShapeProps } from "@/models/game/shape-props";
+import { RigidBodyProps } from "@/models/game/rigid-body-props";
 
 /**
  * hook to attach rigid body to the matter world
@@ -15,10 +16,8 @@ export const useRigidBody = ({
     x = 0,
     y = 0,
     radius = 0,
-    enable = false
-}: ShapeProps & {
-    enable?: boolean;
-}): {
+    isStatic
+}: RigidBodyProps): {
     rigidBody?: Body;
     addBody: (engine: Engine) => void;
 } => {
@@ -31,15 +30,31 @@ export const useRigidBody = ({
         if(!rigidBody){
             let rigidBody;
             if(shape === GameShape.circle){
-                rigidBody = Bodies.circle(x, y, radius);
+                rigidBody = Bodies.circle(x, y, radius, {
+                    isStatic
+                });
+            }
+            else if(shape === GameShape.rectangle){
+                console.log(x, y, width, height);
+                rigidBody = Bodies.rectangle(x + width / 2, y + height / 2, width, height, {
+                    isStatic,
+                });
             }
             if(rigidBody){
                 Composite.add(engine?.world, rigidBody);
                 setrigidBody(rigidBody);
-                console.log('circle rigid body', rigidBody)
+                console.log('rigid body', rigidBody)
             }
         }
     }, [rigidBody]);
+
+    useEffect(() => {
+        if(rigidBody){
+            rigidBody.position.x = x;
+            rigidBody.position.y = y;
+            console.log('position change', rigidBody.position);
+        }
+    }, [x, y]);
 
     return {
         rigidBody,

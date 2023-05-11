@@ -8,4 +8,5 @@ export interface GameObjectProps extends ShapeProps{
     app: Application;
     stage: Container;
     engine: Engine;
+    isStatic?: boolean;
 }
