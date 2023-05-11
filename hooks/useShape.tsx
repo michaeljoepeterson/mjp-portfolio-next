@@ -61,28 +61,6 @@ export const useShape = ({
         graphicsRef.current.position.set(x, y);
     }, [graphicsRef.current, x, y]);
 
-    //todo move to custom hook as more shapes/sprites added
-    // useEffect(() => {
-    //     if(!stage){
-    //         return;
-    //     }
-    //     if(graphicsRef.current){
-    //         graphicsRef.current.clear();
-    //     }
-    //     graphicsRef.current = drawGraphics(stage, x, y);
-    // }, [color, height, stage, width, x, y]);
-
-    // useEffect(() => {
-    //     if(!rigidBody || !app || !enableMatter){
-    //         return;
-    //     }
-    //     app.ticker.add(() => {
-    //         if(stage && graphicsRef.current){
-    //             graphicsRef.current.position.set(rigidBody.position.x, rigidBody.position.y);
-    //         }
-    //     });
-    // }, [rigidBody, app, enableMatter]);
-
     return {
         graphics: graphicsRef.current,
         drawGraphics,

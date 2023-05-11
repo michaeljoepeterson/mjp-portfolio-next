@@ -60,7 +60,6 @@ export const MainGame = ({
         }
         const fps = app.ticker.FPS / 1000;
         Engine.update(engine, fps);
-        //console.log('updating engine', new Date().getSeconds());
     }, []);
 
     useEffect(() => {
