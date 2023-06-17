@@ -27,7 +27,7 @@ export const Pong = ({
     const bottomWallY = window.innerHeight;
     const wallWidth = window.innerWidth;
     const wallHeight = 30;
-
+    // todo will likely need wrapper components for the shapes/sprites to handle specific game logic
     return (
         <>
             <Rectangle 
@@ -40,9 +40,9 @@ export const Pong = ({
                 app={app}
                 engine={engine}
                 enableMatter={true}
-                isStatic={false}
+                isStatic={true}
             />
-            <Rectangle 
+            {/* <Rectangle 
                 stage={stage}
                 x={enemyX}
                 height={paddleHeight}
@@ -51,7 +51,7 @@ export const Pong = ({
                 engine={engine}
                 enableMatter={true}
                 isStatic={true}
-            />
+            /> */}
             <Circle 
                 x={ballX}
                 y={ballY}

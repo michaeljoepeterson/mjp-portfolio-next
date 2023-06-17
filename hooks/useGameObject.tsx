@@ -28,7 +28,8 @@ export const useGameObject = (props: GameObjectProps) => {
     const {
         rigidBody,
         addBody,
-        applyForce
+        applyForce,
+        updatePosition: updateBodyPosition
     } = useRigidBody({
        ...props,
        isStatic
@@ -64,8 +65,12 @@ export const useGameObject = (props: GameObjectProps) => {
         if(!graphics){
             return;
         }
-        updatePosition();
-    }, [x, y]);
+        updatePosition(x, y);
+        if(enableMatter && updateBodyPosition){
+            console.log(x, y, props.color);
+            updateBodyPosition(x, y);
+        }
+    }, [x, y, enableMatter, updateBodyPosition]);
     
     return {
         applyForce: hasEnabledBodyRef.current ? applyForce : undefined

@@ -28,7 +28,7 @@ export const Circle = ({
 
     useEffect(() => {
         if(applyForce){
-            applyForce(-1000, -1000);
+            applyForce(-1500, -1500);
         }
     }, [applyForce]);
 

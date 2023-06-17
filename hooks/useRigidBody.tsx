@@ -21,6 +21,7 @@ export const useRigidBody = ({
     rigidBody?: Body;
     addBody: (engine: Engine) => void;
     applyForce?: (x?:number, y?: number) => void;
+    updatePosition?: (x?:number, y?: number) => void;
 } => {
     const [rigidBody, setrigidBody] = useState<Body | undefined>(undefined);
     const addBody = useCallback((engine: Engine) => {
@@ -39,7 +40,6 @@ export const useRigidBody = ({
                 console.log(x, y, width, height);
                 rigidBody = Bodies.rectangle(x + width / 2, y + height / 2, width, height, {
                     isStatic,
-                    inertia: 0,
                 });
             }
             if(rigidBody){
@@ -64,10 +64,19 @@ export const useRigidBody = ({
         Body.applyForce(rigidBody, {x: rigidBody.position.x, y: rigidBody.position.y}, {x, y});
     }, [rigidBody]);
 
+    const updatePosition = useCallback((x: number = 0, y: number = 0) => {
+        if(!rigidBody){
+            return;
+        }
+        Body.setPosition(rigidBody, {x: x + width / 2, y: y + height / 2});
+        console.log('set position', rigidBody.position, rigidBody);
+    }, [rigidBody, height]);
+
     return {
         rigidBody,
         addBody,
-        applyForce: rigidBody ? applyForce : undefined
+        applyForce: rigidBody ? applyForce : undefined,
+        updatePosition: rigidBody ? updatePosition: undefined
     };
 }
 
