@@ -1,6 +1,7 @@
 import { useGameObject } from "@/hooks/useGameObject";
 import { GameObjectProps } from "@/models/game/game-object-props";
 import { GameShape } from "@/models/game/game-shapes";
+import { useEffect } from "react";
 
 export const Circle = ({
     stage,
@@ -13,7 +14,7 @@ export const Circle = ({
     enableMatter
 }: GameObjectProps) => {
 
-    useGameObject({
+    const {applyForce} = useGameObject({
         shape: GameShape.circle,
         stage,
         color,
@@ -24,6 +25,12 @@ export const Circle = ({
         app,
         enableMatter
     });
+
+    useEffect(() => {
+        if(applyForce){
+            applyForce(-1000, -1000);
+        }
+    }, [applyForce]);
 
     return (
         <></>

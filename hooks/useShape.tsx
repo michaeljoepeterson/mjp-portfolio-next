@@ -52,7 +52,7 @@ export const useShape = ({
         curretnGraphics.position.set(x, y);
         curretnGraphics.endFill();
         stage.addChild(curretnGraphics);
-        graphicsRef.current = curretnGraphics
+        graphicsRef.current = curretnGraphics;
         return curretnGraphics;
     }, [graphicsRef.current, x, y, radius, width, height]);
 

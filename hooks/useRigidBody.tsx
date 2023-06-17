@@ -20,6 +20,7 @@ export const useRigidBody = ({
 }: RigidBodyProps): {
     rigidBody?: Body;
     addBody: (engine: Engine) => void;
+    applyForce?: (x?:number, y?: number) => void;
 } => {
     const [rigidBody, setrigidBody] = useState<Body | undefined>(undefined);
     const addBody = useCallback((engine: Engine) => {
@@ -31,19 +32,20 @@ export const useRigidBody = ({
             let rigidBody;
             if(shape === GameShape.circle){
                 rigidBody = Bodies.circle(x, y, radius, {
-                    isStatic
+                    isStatic,
                 });
             }
             else if(shape === GameShape.rectangle){
                 console.log(x, y, width, height);
                 rigidBody = Bodies.rectangle(x + width / 2, y + height / 2, width, height, {
                     isStatic,
+                    inertia: 0,
                 });
             }
             if(rigidBody){
                 Composite.add(engine?.world, rigidBody);
                 setrigidBody(rigidBody);
-                console.log('rigid body', rigidBody)
+                console.log('attached rigid body', rigidBody)
             }
         }
     }, [rigidBody]);
@@ -52,13 +54,20 @@ export const useRigidBody = ({
         if(rigidBody){
             rigidBody.position.x = x;
             rigidBody.position.y = y;
-            console.log('position change', rigidBody.position);
         }
     }, [x, y]);
 
+    const applyForce = useCallback((x: number = 0, y: number = 0) => {
+        if(!rigidBody){
+            return;
+        }
+        Body.applyForce(rigidBody, {x: rigidBody.position.x, y: rigidBody.position.y}, {x, y});
+    }, [rigidBody]);
+
     return {
         rigidBody,
-        addBody
+        addBody,
+        applyForce: rigidBody ? applyForce : undefined
     };
 }
 

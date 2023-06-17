@@ -27,7 +27,8 @@ export const useGameObject = (props: GameObjectProps) => {
 
     const {
         rigidBody,
-        addBody
+        addBody,
+        applyForce
     } = useRigidBody({
        ...props,
        isStatic
@@ -65,4 +66,8 @@ export const useGameObject = (props: GameObjectProps) => {
         }
         updatePosition();
     }, [x, y]);
+    
+    return {
+        applyForce: hasEnabledBodyRef.current ? applyForce : undefined
+    };
 }
