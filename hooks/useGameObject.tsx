@@ -1,13 +1,23 @@
-import { GameObjectProps } from "@/models/game/game-object-props";
+import { BaseGameObject, GameObjectProps } from "@/models/game/game-object-props";
 import useShape from "./useShape";
 import useRigidBody from "./useRigidBody";
 import { useEffect, useRef } from "react";
+import { addGameObject } from "@/store/game-state/game-slice";
+import { useDispatch } from "react-redux";
 
 /**
  * game object hook that combines the matter rigid body with the pixijs shape
  * @param props 
  */
 export const useGameObject = (props: GameObjectProps) => {
+    
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        const gameObject = new BaseGameObject(props);
+        dispatch(addGameObject(gameObject));
+    }, []);
+
     const {
         stage,
         app,
@@ -36,7 +46,7 @@ export const useGameObject = (props: GameObjectProps) => {
 
     // sync sprite with rigid body
     useEffect(() => {
-        if(!app || !enableMatter){
+        if(!app || !enableMatter || !engine){
             return;
         }
         app.ticker.add(() => {

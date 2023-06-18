@@ -41,19 +41,19 @@ export const useShape = ({
             stage.removeChild(graphicsRef.current);
         }
         console.log('draw graphics');
-        const curretnGraphics = new Graphics();
-        curretnGraphics.beginFill(color);
+        const currentGraphics = new Graphics();
+        currentGraphics.beginFill(color);
         if(shape === GameShape.rectangle){
-            curretnGraphics.drawRect(0, 0, width, height);
+            currentGraphics.drawRect(0, 0, width, height);
         }
         else if(shape === GameShape.circle){
-            curretnGraphics.drawCircle(0, 0, radius);
+            currentGraphics.drawCircle(0, 0, radius);
         }
-        curretnGraphics.position.set(x, y);
-        curretnGraphics.endFill();
-        stage.addChild(curretnGraphics);
-        graphicsRef.current = curretnGraphics;
-        return curretnGraphics;
+        currentGraphics.position.set(x, y);
+        currentGraphics.endFill();
+        stage.addChild(currentGraphics);
+        graphicsRef.current = currentGraphics;
+        return currentGraphics;
     }, [graphicsRef.current, x, y, radius, width, height]);
 
     /**

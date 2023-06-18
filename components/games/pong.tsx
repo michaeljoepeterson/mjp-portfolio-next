@@ -12,7 +12,7 @@ export const Pong = ({
 }: {
     stage: Container;
     app: Application;
-    engine: Matter.Engine;
+    engine?: Matter.Engine;
 }) => {
     const gameState = useSelector((state: RootState) => state.gameState);
     const {mouseY} = gameState;
@@ -41,6 +41,7 @@ export const Pong = ({
                 engine={engine}
                 enableMatter={true}
                 isStatic={false}
+                id={'player'}
             />
             <Rectangle 
                 stage={stage}
@@ -51,6 +52,7 @@ export const Pong = ({
                 engine={engine}
                 enableMatter={true}
                 isStatic={true}
+                id={'enemy'}
             />
             <Circle 
                 x={ballX}
@@ -61,6 +63,7 @@ export const Pong = ({
                 engine={engine}
                 app={app}
                 enableMatter={true}
+                id={'ball'}
             />
             <Rectangle 
                 stage={stage}
@@ -73,6 +76,7 @@ export const Pong = ({
                 color="green"
                 enableMatter={true}
                 isStatic={true}
+                id={'wallTop'}
             />
             <Rectangle 
                 stage={stage}
@@ -85,6 +89,7 @@ export const Pong = ({
                 color="green"
                 enableMatter={true}
                 isStatic={true}
+                id={'wallBottom'}
             />
         </>
     );

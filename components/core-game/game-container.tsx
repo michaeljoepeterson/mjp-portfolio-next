@@ -4,6 +4,7 @@ import MainGame from "./main-game/main-game";
 import { useCallback, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { setMousePosition } from "@/store/game-state/game-slice";
+import GameCustomPhysics from "./game-custom-physics/game-custom-physics";
 
 /**
  * main game container that hooks up the main game stage and renders the correct selected game
@@ -12,10 +13,13 @@ import { setMousePosition } from "@/store/game-state/game-slice";
  */
 export const GameContainer = ({
     selectedGame = Games.pong,
-    target
+    target,
+    useMatter
 }: {
     selectedGame?: Games;
-    target: HTMLElement
+    target: HTMLElement;
+    // temp remove when convert done
+    useMatter?: boolean;
 }) => {
 
     const dispatch = useDispatch();
@@ -37,25 +41,51 @@ export const GameContainer = ({
     return (
         <div>
             Game container
-            <MainGame target={target}>
-                {
-                    ({stage, app, engine}) => {
-                        return (
-                            <>
-                                { selectedGame === Games.pong && 
-                                    (
-                                        <Pong 
-                                            stage={stage}
-                                            app={app}
-                                            engine={engine} 
-                                        />
-                                    )
-                                }
-                            </>
-                        )
-                    }
-                }
-            </MainGame>
+            {
+                useMatter && (
+                    <MainGame target={target}>
+                        {
+                            ({stage, app, engine}) => {
+                                return (
+                                    <>
+                                        { selectedGame === Games.pong && 
+                                            (
+                                                <Pong 
+                                                    stage={stage}
+                                                    app={app}
+                                                    engine={engine} 
+                                                />
+                                            )
+                                        }
+                                    </>
+                                )
+                            }
+                        }
+                    </MainGame>
+                )
+            }
+            {
+                !useMatter && (
+                    <GameCustomPhysics target={target}>
+                        {
+                            ({stage, app}) => {
+                                return (
+                                    <>
+                                        { selectedGame === Games.pong && 
+                                            (
+                                                <Pong 
+                                                    stage={stage}
+                                                    app={app}
+                                                />
+                                            )
+                                        }
+                                    </>
+                                )
+                            }
+                        }
+                    </GameCustomPhysics>
+                )
+            }
         </div>
     )
 }
