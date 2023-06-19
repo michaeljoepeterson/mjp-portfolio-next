@@ -12,8 +12,7 @@ export const CoreGameCanvas = ({
         app: Application;
     }) => any;
 }) => {
-    const context = useGameContext();
-    const {updateApp, updateStage} = context
+    const {updateApp, updateStage} = useGameContext();
     const app = useMemo(() => {
         //catch issue with ssr
         try{

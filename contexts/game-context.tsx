@@ -1,11 +1,14 @@
 import { Application, Container } from "pixi.js";
 import { createContext, useCallback, useContext, useState } from "react";
+import { System } from "detect-collisions";
 
 export interface IGameContext{
     app?: Application;
     stage?: Container;
+    physics?: System;
     updateApp: (app: Application) => void;
     updateStage: (stage: Container) => void;
+    updatePhysics: (system: System) => void;
 }
 
 export const GameContext = createContext<IGameContext | undefined>(undefined);
@@ -17,6 +20,7 @@ export const GameContextProvider = ({
 }) => {
     const [app, setApp] = useState<Application>();
     const [stage, setStage] = useState<Container>();
+    const [physics, setPhysics] = useState<System>();
 
     const updateApp = useCallback((app: Application) => {
         setApp(app);
@@ -26,12 +30,20 @@ export const GameContextProvider = ({
         setStage(stage);
     }, []);
 
+    const updatePhysics = useCallback((physics: System) => {
+        setPhysics(physics);
+    }, []);
+
+    console.log('context rerender');
+
     return (
         <GameContext.Provider value={{
             app,
             stage,
+            physics,
             updateApp,
-            updateStage
+            updateStage,
+            updatePhysics
         }}>
             {children}
         </GameContext.Provider>

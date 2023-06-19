@@ -1,8 +1,7 @@
-import { BaseGameObject, GameObjectProps } from "@/models/game/game-object-props";
+import { GameObjectProps } from "@/models/game/game-object-props";
 import useShape from "./useShape";
 import useRigidBody from "./useRigidBody";
 import { useEffect, useRef } from "react";
-import { useDispatch } from "react-redux";
 import { useGameContext } from "@/contexts/game-context";
 
 /**
@@ -10,8 +9,7 @@ import { useGameContext } from "@/contexts/game-context";
  * @param props 
  */
 export const useGameObject = (props: GameObjectProps) => {
-    const context = useGameContext();
-    const {app, stage} = context;
+    const {app, stage, physics}  = useGameContext();
     const {
         enableMatter,
         engine,
