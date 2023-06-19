@@ -2,25 +2,17 @@ import { BaseGameObject, GameObjectProps } from "@/models/game/game-object-props
 import useShape from "./useShape";
 import useRigidBody from "./useRigidBody";
 import { useEffect, useRef } from "react";
-import { addGameObject } from "@/store/game-state/game-slice";
 import { useDispatch } from "react-redux";
+import { useGameContext } from "@/contexts/game-context";
 
 /**
  * game object hook that combines the matter rigid body with the pixijs shape
  * @param props 
  */
 export const useGameObject = (props: GameObjectProps) => {
-    
-    const dispatch = useDispatch();
-
-    useEffect(() => {
-        const gameObject = new BaseGameObject(props);
-        dispatch(addGameObject(gameObject));
-    }, []);
-
+    const context = useGameContext();
+    const {app, stage} = context;
     const {
-        stage,
-        app,
         enableMatter,
         engine,
         x,

@@ -1,4 +1,3 @@
-import { Application, Container } from "pixi.js";
 import Rectangle from "../core-game/shapes/rectangle";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
@@ -6,12 +5,8 @@ import Circle from "../core-game/shapes/circle";
 import Matter from "matter-js";
 
 export const Pong = ({
-    stage,
-    app,
     engine
 }: {
-    stage: Container;
-    app: Application;
     engine?: Matter.Engine;
 }) => {
     const gameState = useSelector((state: RootState) => state.gameState);
@@ -31,24 +26,20 @@ export const Pong = ({
     return (
         <>
             <Rectangle 
-                stage={stage}
                 color="blue"
                 height={paddleHeight}
                 width={paddleWidth}
                 x={0}
                 y={playerY}
-                app={app}
                 engine={engine}
                 enableMatter={true}
                 isStatic={false}
                 id={'player'}
             />
             <Rectangle 
-                stage={stage}
                 x={enemyX}
                 height={paddleHeight}
                 width={paddleWidth}
-                app={app}
                 engine={engine}
                 enableMatter={true}
                 isStatic={true}
@@ -58,20 +49,16 @@ export const Pong = ({
                 x={ballX}
                 y={ballY}
                 radius={ballRadius}
-                stage={stage}
                 color="yellow"
                 engine={engine}
-                app={app}
                 enableMatter={true}
                 id={'ball'}
             />
             <Rectangle 
-                stage={stage}
                 x={0}
                 y={topWallY}
                 height={wallHeight}
                 width={wallWidth}
-                app={app}
                 engine={engine}
                 color="green"
                 enableMatter={true}
@@ -79,12 +66,10 @@ export const Pong = ({
                 id={'wallTop'}
             />
             <Rectangle 
-                stage={stage}
                 x={0}
                 y={bottomWallY}
                 height={wallHeight}
                 width={wallWidth}
-                app={app}
                 engine={engine}
                 color="green"
                 enableMatter={true}

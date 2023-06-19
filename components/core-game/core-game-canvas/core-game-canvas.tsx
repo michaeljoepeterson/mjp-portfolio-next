@@ -1,3 +1,4 @@
+import { useGameContext } from "@/contexts/game-context";
 import { Application, Container } from "pixi.js";
 import { useMemo, useEffect } from "react";
 
@@ -11,6 +12,8 @@ export const CoreGameCanvas = ({
         app: Application;
     }) => any;
 }) => {
+    const context = useGameContext();
+    const {updateApp, updateStage} = context
     const app = useMemo(() => {
         //catch issue with ssr
         try{
@@ -28,6 +31,10 @@ export const CoreGameCanvas = ({
     }, []);
 
     useEffect(() => {
+        if(app){
+            updateApp(app);
+            updateStage(app.stage);
+        }
         return () => {
             console.log('cleanup app', app);
         }

@@ -8,8 +8,6 @@ import { ShapeProps } from "./shape-props";
  */
 export interface GameObjectProps extends ShapeProps{
     enableMatter?: boolean;
-    app: Application;
-    stage: Container;
     engine?: Engine;
     isStatic?: boolean;
 }
@@ -25,8 +23,6 @@ export class BaseGameObject{
             return;
         }
         const {
-            app,
-            stage,
             engine,
             id,
             ...props

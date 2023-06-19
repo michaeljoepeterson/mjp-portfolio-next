@@ -5,6 +5,7 @@ import { useCallback, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { setMousePosition } from "@/store/game-state/game-slice";
 import GameCustomPhysics from "./game-custom-physics/game-custom-physics";
+import { GameContextProvider } from "@/contexts/game-context";
 
 /**
  * main game container that hooks up the main game stage and renders the correct selected game
@@ -40,52 +41,51 @@ export const GameContainer = ({
 
     return (
         <div>
-            Game container
-            {
-                useMatter && (
-                    <MainGame target={target}>
-                        {
-                            ({stage, app, engine}) => {
-                                return (
-                                    <>
-                                        { selectedGame === Games.pong && 
-                                            (
-                                                <Pong 
-                                                    stage={stage}
-                                                    app={app}
-                                                    engine={engine} 
-                                                />
-                                            )
-                                        }
-                                    </>
-                                )
-                            }
-                        }
-                    </MainGame>
-                )
-            }
-            {
-                !useMatter && (
-                    <GameCustomPhysics target={target}>
-                        {
-                            ({stage, app}) => {
-                                return (
-                                    <>
-                                        { selectedGame === Games.pong && 
-                                            (
-                                                <Pong 
-                                                    stage={stage}
-                                                    app={app}
-                                                />
-                                            )
-                                        }
-                                    </>
-                                )
-                            }
-                        }
-                    </GameCustomPhysics>
-                )
-            }
+            <GameContextProvider>
+                <>
+                    Game container
+                    {
+                        useMatter && (
+                            <MainGame target={target}>
+                                {
+                                    ({stage, app, engine}) => {
+                                        return (
+                                            <>
+                                                { selectedGame === Games.pong && 
+                                                    (
+                                                        <Pong
+                                                            engine={engine} 
+                                                        />
+                                                    )
+                                                }
+                                            </>
+                                        )
+                                    }
+                                }
+                            </MainGame>
+                        )
+                    }
+                    {
+                        !useMatter && (
+                            <GameCustomPhysics target={target}>
+                                {
+                                    ({stage, app}) => {
+                                        return (
+                                            <>
+                                                { selectedGame === Games.pong && 
+                                                    (
+                                                        <Pong/>
+                                                    )
+                                                }
+                                            </>
+                                        )
+                                    }
+                                }
+                            </GameCustomPhysics>
+                        )
+                    }
+                 </>
+            </GameContextProvider>
         </div>
     )
 }
