@@ -3,6 +3,7 @@ import useShape from "./useShape";
 import useRigidBody from "./useRigidBody";
 import { useEffect, useRef } from "react";
 import { useGameContext } from "@/contexts/game-context";
+import { usePhysicsBody } from "./usePhysicsBody";
 
 /**
  * game object hook that combines the matter rigid body with the pixijs shape
@@ -33,6 +34,8 @@ export const useGameObject = (props: GameObjectProps) => {
        ...props,
        isStatic
     });
+
+    usePhysicsBody(props);
 
     // sync sprite with rigid body
     useEffect(() => {

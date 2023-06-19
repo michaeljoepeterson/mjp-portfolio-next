@@ -1,7 +1,6 @@
 import { GameShape } from "@/models/game/game-shapes";
 import { Bodies, Body, Composite, Engine } from "matter-js";
 import { useCallback, useEffect, useState } from "react";
-import { ShapeProps } from "@/models/game/shape-props";
 import { RigidBodyProps } from "@/models/game/rigid-body-props";
 
 /**
